@@ -1,0 +1,86 @@
+﻿@using CarShowRoom.Models
+@model IEnumerable<CarAllViewModel>
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1>All Cars</h1>
+<p>
+    <a asp-action="Create">Create New Car</a>
+</p>
+
+<form asp-controller="Cars" asp-action="All" method="get">
+    <p>
+        Model : <input type="text" name="searchStringModel" />
+        Price : <input type="text" name="searchDoublePrice" />
+        <input type="submit" value="Filter" />
+
+    </p>
+
+
+</form>
+
+<form asp-controller="Cars" asp-action="Sort" method="get">
+    <p>
+
+        <input type="submit" value="Sort" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RegNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Picture)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.YearOfManufacture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem=>item.Picture)" alt="Image" width="100px" />
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.YearOfManufacture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="Cars" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
